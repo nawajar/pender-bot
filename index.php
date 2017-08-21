@@ -1,2 +1,2 @@
 <?php
-echo "PENDER LINE BOT 1.0";
+echo "PENDER LINE BOT 1.1";
