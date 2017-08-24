@@ -93,7 +93,8 @@ if (!is_null($events['events'])) {
 							sendMsg($msg , $replyToken);
 						}else if($fnc[0] == 'bot:randomint'){
 							$item = explode(",", $fnc[1]);
-							$a = mt_rand((int)$item[0],(int)$item[1]));
+							$a = mt_rand($item[0],$item[1]);
+							sendMsg($a , $replyToken);
 						}
 
 			}
