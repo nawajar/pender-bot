@@ -66,7 +66,7 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 			$msg = "";	
-			$fnc = explode(" ", $text);
+			$fnc = explode("#", $text);
 			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4')
 			{
 			
