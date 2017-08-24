@@ -70,7 +70,7 @@ if (!is_null($events['events'])) {
 				
 			}else if ($fnc[0] == 'bot:time'){
 							$today = date("D M j G:i:s T Y");	
-					     	$msg = $oday;	
+					     	$msg = $today;	
 					     	send_msg($msg , $replyToken);
 			}	
 			
