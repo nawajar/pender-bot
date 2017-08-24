@@ -14,19 +14,16 @@ if (!is_null($events['events'])) {
 			// Get text sent
 			$text = $event['message']['text'];
 			$user = $event['source']['userId'];
-			
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+
 			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4'){
 			$msg = "";	
 			$fnc = explode(" ", $text);
 				if($fnc[0] == 'bot:type'){
 					$msg = $fnc[1];
-				}else{
-					$msg = $text;
-				}		
-				// Get replyToken
-			$replyToken = $event['replyToken'];
-
-			// Build message to reply back
+					
+					// Build message to reply back
 			$messages = [
 				'type' => 'text',
 				'text' => $msg
@@ -51,6 +48,37 @@ if (!is_null($events['events'])) {
 			curl_close($ch);
 
 			echo $result . "\r\n";
+				
+			}else if ($fnc[0] == "bot:grean"){
+					
+		      for($x = 1; $x <= 10; $x++){
+				$messages = [
+				'type' => 'text',
+				'text' => $x
+			];
+
+			// Make a POST Request to Messaging API to reply to sender
+			$url = 'https://api.line.me/v2/bot/message/reply';
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];
+			$post = json_encode($data);
+			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			$result = curl_exec($ch);
+			curl_close($ch);
+				}	
+					
+			}		
+			
+			
 				
 			}	
 				
