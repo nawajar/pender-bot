@@ -13,13 +13,23 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			$text = $event['message']['text'];
-			// Get replyToken
+			$user = $event['source']['userId'];
+			
+			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4'){
+			$msg = "";	
+			$fnc = explode(" ", $text);
+				if($fnc[0] == 'bot:type'){
+					$msg = $fnc[1];
+				}else{
+					$msg = $text;
+				}		
+				// Get replyToken
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => json_encode($event)
+				'text' => $msg
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
@@ -41,6 +51,10 @@ if (!is_null($events['events'])) {
 			curl_close($ch);
 
 			echo $result . "\r\n";
+				
+			}	
+				
+			
 		}else{
 			$replyToken = $event['replyToken'];
 			$messages = [
