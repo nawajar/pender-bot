@@ -44,10 +44,15 @@ if (!is_null($events['events'])) {
 			}else{
 					if($fnc[0] == 'bot:cal')
 						{
-							$msg = $fnc[1];
-							calculate_string($msg);
+							$msg = calc_string($fnc[1]);
 							push($msg , $replyToken);
 		
+						}else if($fnc[0] == 'bot:randomstr'){
+							$msg = generateRandomString($fnc[1]);
+							push($msg , $replyToken);
+						}else if($fnc[0] == 'bot:randomint'){
+							$item = explode(",", $fnc[1]);
+							$a = mt_rand((int)$item[0],(int)$item[1]));
 						}
 
 			}
@@ -56,13 +61,22 @@ if (!is_null($events['events'])) {
 
 }
 
-function calculate_string( $mathString )    {
-	$mathString = trim($mathString);   
-	$mathString = ereg_replace ('[^0-9+-*/() ]', '', $mathString);    
+ function calc_string( $mathString )
+{
+        $cf_DoCalc = create_function("", "return (" . $mathString . ");" );   
+        return $cf_DoCalc();
+};
 
-	$compute = create_function("", "return (" . $mathString . ");" );
-	return 0 + $compute();
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
+
 
 
 
