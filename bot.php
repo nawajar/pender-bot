@@ -72,7 +72,19 @@ if (!is_null($events['events'])) {
 							$today = date("D M j G:i:s T Y");	
 					     	$msg = $today;	
 					     	send_msg($msg , $replyToken);
-			}	
+			}else if($fnc[0] == 'bot:cal')
+						{
+							$msg = calc_string($fnc[1]);
+							sendMsg($msg , $replyToken);
+		
+						}else if($fnc[0] == 'bot:randomstr'){
+							$msg = generateRandomString($fnc[1]);
+							sendMsg($msg , $replyToken);
+						}else if($fnc[0] == 'bot:randomint'){
+							$item = explode(",", $fnc[1]);
+							$a = mt_rand($item[0],$item[1]);
+							sendMsg($a , $replyToken);
+						}	
 			
 			
 				
