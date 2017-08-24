@@ -75,15 +75,15 @@ if (!is_null($events['events'])) {
 			}else if($fnc[0] == 'bot:cal')
 						{
 							$msg = calc_string($fnc[1]);
-							sendMsg($msg , $replyToken);
+							send_msg($msg , $replyToken);
 		
 						}else if($fnc[0] == 'bot:randomstr'){
-							$msg = generateRandomString($fnc[1]);
-							sendMsg($msg , $replyToken);
+							$msg = generateRandomString((int)$fnc[1]);
+							send_msg($msg , $replyToken);
 						}else if($fnc[0] == 'bot:randomint'){
 							$item = explode(",", $fnc[1]);
 							$a = mt_rand($item[0],$item[1]);
-							sendMsg($a , $replyToken);
+							send_msg($a , $replyToken);
 						}	
 			
 			
@@ -92,15 +92,15 @@ if (!is_null($events['events'])) {
 				if($fnc[0] == 'bot:cal')
 						{
 							$msg = calc_string($fnc[1]);
-							sendMsg($msg , $replyToken);
+							send_msg($msg , $replyToken);
 		
 						}else if($fnc[0] == 'bot:randomstr'){
 							$msg = generateRandomString($fnc[1]);
-							sendMsg($msg , $replyToken);
+							send_msg($msg , $replyToken);
 						}else if($fnc[0] == 'bot:randomint'){
 							$item = explode(",", $fnc[1]);
 							$a = mt_rand($item[0],$item[1]);
-							sendMsg($a , $replyToken);
+							send_msg($a , $replyToken);
 						}
 
 
