@@ -1,5 +1,19 @@
 <?php
+function calc_string( $mathString )
+{
+        $cf_DoCalc = create_function("", "return (" . $mathString . ");" );   
+        return $cf_DoCalc();
+};
 
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+};
 
 function send_msg($msg,$replyToken){
 
@@ -27,7 +41,7 @@ function send_msg($msg,$replyToken){
 			curl_close($ch);
 			echo $result . "\r\n";
 
-}
+};
 
 
 // Get POST body content
@@ -45,22 +59,39 @@ if (!is_null($events['events'])) {
 			$user = $event['source']['userId'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
-			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4'){
 			$msg = "";	
-			$fnc = explode(" ", $text);
+			$fnc = explode(">", $text);
+			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4'){
+			
 				if($fnc[0] == 'bot:type'){
 					$msg = $fnc[1];
 					send_msg($msg , $replyToken);
 				
 				
-			}else if ($fnc[0] == "bot:grean"){
-					
-		     	
-					
-			}		
+			}else if ($fnc[0] == 'bot:time'){
+							$today = date("D M j G:i:s T Y");	
+					     	$msg = String($today);	
+					     	send_msg($msg , $replyToken);
+			}	
 			
 			
 				
+			}else{
+				if($fnc[0] == 'bot:cal')
+						{
+							$msg = calc_string($fnc[1]);
+							sendMsg($msg , $replyToken);
+		
+						}else if($fnc[0] == 'bot:randomstr'){
+							$msg = generateRandomString($fnc[1]);
+							sendMsg($msg , $replyToken);
+						}else if($fnc[0] == 'bot:randomint'){
+							$item = explode(",", $fnc[1]);
+							$a = mt_rand($item[0],$item[1]);
+							sendMsg($a , $replyToken);
+						}
+
+
 			}	
 				
 			
