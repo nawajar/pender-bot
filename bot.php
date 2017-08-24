@@ -21,11 +21,9 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 			$msg = "";	
-			$fnc = explode("#", $text);
+			$fnc = explode(" ", $text);
 			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4')
 			{
-			
-			
 			
 
 						if($fnc[0] == 'bot:type')
@@ -81,7 +79,7 @@ function generateRandomString($length = 10) {
 
 function push($msg , $replyToken) {
 $access_token = 'ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU=';
-	
+
 		// Build message to reply back
  		 $messages = [
 				'type' => 'text',
