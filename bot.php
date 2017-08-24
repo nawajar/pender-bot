@@ -1,29 +1,8 @@
 <?php
 
-
 $access_token = 'ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU=';
-// Get POST body content
-$content = file_get_contents('php://input');
-// Parse JSON
-$events = json_decode($content, true);
-// Validate parsed JSON data
-if (!is_null($events['events'])) {
-	// Loop through each event
-	foreach ($events['events'] as $event) {
-		// Reply only when message sent is in 'text' format
-		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-			// Get text sent
-			$text = $event['message']['text'];
-			$user = $event['source']['userId'];
-			// Get replyToken
-			$replyToken = $event['replyToken'];
-			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4'){
-			$msg = "";	
-			$fnc = explode(" ", $text);
-				if($fnc[0] == 'bot:type'){
-					$msg = $fnc[1];
-					
-					// Build message to reply back
+function send_msg($msg,$replyToken){
+		// Build message to reply back
 			$messages = [
 				'type' => 'text',
 				'text' => $msg
@@ -45,6 +24,32 @@ if (!is_null($events['events'])) {
 			$result = curl_exec($ch);
 			curl_close($ch);
 			echo $result . "\r\n";
+
+}
+
+
+// Get POST body content
+$content = file_get_contents('php://input');
+// Parse JSON
+$events = json_decode($content, true);
+// Validate parsed JSON data
+if (!is_null($events['events'])) {
+	// Loop through each event
+	foreach ($events['events'] as $event) {
+		// Reply only when message sent is in 'text' format
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			// Get text sent
+			$text = $event['message']['text'];
+			$user = $event['source']['userId'];
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+			if($user == 'Ua0afffd8ddfae4569dff6ab0abb17ee4'){
+			$msg = "";	
+			$fnc = explode(" ", $text);
+				if($fnc[0] == 'bot:type'){
+					$msg = $fnc[1];
+					send_msg($msg , $replyToken);
+				
 				
 			}else if ($fnc[0] == "bot:grean"){
 					
